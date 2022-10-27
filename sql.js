@@ -7,12 +7,12 @@ Returns a SQL query string that will create the Country table with four columns:
 
 const createCountryTable = () => {
 
-  return "CREATE TABLE 'Country' (" +
-    "id INTEGER NOT NULL PRIMARY KEY," +
-    "name TEXT NOT NULL," +
-    "code TEXT NOT NULL," +
-    "gdp INTEGER," +
-    "population INTEGER,";
+    return "CREATE TABLE 'Country' (" +
+        "id INTEGER NOT NULL PRIMARY KEY," +
+        "name TEXT NOT NULL," +
+        "code TEXT NOT NULL," +
+        "gdp INTEGER," +
+        "population INTEGER,";
 };
 
 /*
@@ -20,17 +20,17 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 */
 
 const createGoldMedalTable = () => {
-  return "CREATE TABLE 'GoldMedal' (" +
-    "id INTEGER NOT NULL PRIMARY KEY," +
-    "year INTEGER NOT NULL," +
-    "city TEXT NOT NULL," +
-    "season TEXT NOT NULL," +
-    "name TEXT NOT NULL," +
-    "country TEXT NOT NULL," +
-    "gender TEXT NOT NULL," +
-    "sport TEXT NOT NULL," +
-    "discipline TEXT NOT NULL," +
-    "event TEXT NOT NULL,";
+    return "CREATE TABLE 'GoldMedal' (" +
+        "id INTEGER NOT NULL PRIMARY KEY," +
+        "year INTEGER NOT NULL," +
+        "city TEXT NOT NULL," +
+        "season TEXT NOT NULL," +
+        "name TEXT NOT NULL," +
+        "country TEXT NOT NULL," +
+        "gender TEXT NOT NULL," +
+        "sport TEXT NOT NULL," +
+        "discipline TEXT NOT NULL," +
+        "event TEXT NOT NULL,";
 };
 
 /*
@@ -38,7 +38,8 @@ Returns a SQL query string that will find the number of gold medals for the give
 */
 
 const goldMedalNumber = country => {
-  return "SELECT COUNT(*) FROM GoldMedal WHERE country = '" + country + "';" ;
+    return `SELECT COUNT(*) FROM GoldMedal
+            WHERE country =${country};`
 };
 
 /*
@@ -47,7 +48,13 @@ won the most summer medals, along with the number of medals aliased to 'count'.
 */
 
 const mostSummerWins = country => {
-  return;
+    return `SELECT year, COUNT(*) as count
+            FROM GoldMedal
+            WHERE country = ${country}
+            AND season = 'Summer'
+            GROUP BY year
+            ORDER BY count
+            DESC LIMIT 1;`
 };
 
 /*
@@ -56,7 +63,13 @@ won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
 const mostWinterWins = country => {
-  return;
+    return `SELECT year, COUNT(*) as count
+            FROM GoldMedal
+            WHERE country = ${country}
+            AND season = 'Winter'
+            GROUP BY year
+            ORDER BY count
+            DESC LIMIT 1;`
 };
 
 /*
@@ -65,7 +78,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestYear = country => {
-  return;
+    return;
 };
 
 /*
@@ -74,7 +87,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestDiscipline = country => {
-  return;
+    return;
 };
 
 /*
@@ -83,7 +96,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-  return;
+    return;
 };
 
 /*
@@ -92,7 +105,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestEvent = country => {
-  return;
+    return;
 };
 
 /*
@@ -100,7 +113,7 @@ Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-  return;
+    return;
 };
 
 /*
@@ -108,7 +121,7 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-  return;
+    return;
 };
 
 /*
@@ -116,7 +129,7 @@ Returns a SQL query string that will find the athlete with the most medals.
 */
 
 const mostMedaledAthlete = country => {
-  return;
+    return;
 };
 
 /*
@@ -125,7 +138,7 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-  return;
+    return;
 };
 
 /*
@@ -136,22 +149,22 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 */
 
 const orderedSports = (country, field, sortAscending) => {
-  return;
+    return;
 };
 
 module.exports = {
-  createCountryTable,
-  createGoldMedalTable,
-  goldMedalNumber,
-  mostSummerWins,
-  mostWinterWins,
-  bestDiscipline,
-  bestSport,
-  bestYear,
-  bestEvent,
-  numberMenMedalists,
-  numberWomenMedalists,
-  mostMedaledAthlete,
-  orderedMedals,
-  orderedSports
+    createCountryTable,
+    createGoldMedalTable,
+    goldMedalNumber,
+    mostSummerWins,
+    mostWinterWins,
+    bestDiscipline,
+    bestSport,
+    bestYear,
+    bestEvent,
+    numberMenMedalists,
+    numberWomenMedalists,
+    mostMedaledAthlete,
+    orderedMedals,
+    orderedSports
 };
